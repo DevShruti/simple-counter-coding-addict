@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const UseStateCounter = () => {
+  const [value, setValue] = useState(0);
+
+  const reset = () => {
+    setValue(0);
+  };
+
+  const complexIncrease = () => {
+    setTimeout(() => {
+      // setValue(value + 1);
+      setValue((prevState) => {
+        return prevState + 1;
+      });
+    }, 2000);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <section style={{ margin: '4rem 0' }}>
+        <h2>regular counter</h2>
+        <h1>{value}</h1>
+        <button className='btn' onClick={() => setValue(value - 1)}>
+          decrease
+        </button>
+        <button className='btn' onClick={reset}>
+          reset
+        </button>
+        <button className='btn' onClick={() => setValue(value + 1)}>
+          increase
+        </button>
+      </section>
+      <section style={{ margin: '4rem 0' }}>
+        <h2>more complex counter</h2>
+        <h1>{value}</h1>
+        <button className='btn' onClick={complexIncrease}>
+          increase later
+        </button>
+      </section>
+    </>
   );
-}
+};
 
-export default App;
+export default UseStateCounter;
